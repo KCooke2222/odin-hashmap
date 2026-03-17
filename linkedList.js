@@ -1,7 +1,7 @@
 class Node {
   constructor(key, value, next = null) {
     this.next = next;
-    this.key;
+    this.key = key;
     this.value = value;
   }
 }
@@ -23,6 +23,17 @@ class LinkedList {
     this.size++;
   }
 
+  set(key, value) {
+    let cur = this.head;
+
+    for (let i = 0; i < this.size; i++) {
+      cur = cur.next;
+      if (cur.key === key) {
+        cur.value = value;
+      }
+    }
+  }
+
   remove(key) {
     let cur = this.head;
     let prev = this.head;
@@ -30,6 +41,7 @@ class LinkedList {
       cur = cur.next;
       if (cur.key == key) {
         prev.next = prev.next.next;
+        this.size--;
         return true;
       }
       prev = prev.next;
@@ -43,7 +55,7 @@ class LinkedList {
 
     for (let i = 0; i < this.size; i++) {
       cur = cur.next;
-      if (cur.key == key) {
+      if (cur.key === key) {
         return cur.value;
       }
     }
@@ -57,7 +69,7 @@ class LinkedList {
 
     for (let i = 0; i < this.size; i++) {
       cur = cur.next;
-      keys.append(cur.key);
+      keys.push(cur.key);
     }
 
     return keys;
@@ -69,7 +81,7 @@ class LinkedList {
 
     for (let i = 0; i < this.size; i++) {
       cur = cur.next;
-      values.append(cur.value);
+      values.push(cur.value);
     }
 
     return values;
